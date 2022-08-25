@@ -1,0 +1,60 @@
+<!-- Modal -->
+<div class="modal fade @_modalClass" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" style="display: @_modalDisplay">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add New App Component</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" @onclick="Close" aria-label="Close"></button>
+            </div>
+            <EditForm Model="@AppComponent" OnValidSubmit="@HandleValidSubmit">
+                <div class="modal-body">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="form-group">
+                        <label class="fw-bold" for="name">Name: </label>
+                        <input id="name" class="form-control" @bind="@AppComponent.Name" placeholder="Enter Name"></input>
+                        <ValidationMessage For="@(() => AppComponent.Name)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="fw-bold" for="infrastructureComponent">Infrastructure Component: </label>
+                        <InputSelect id="country" class="form-control col-sm-8" @bind-Value="@SelectedInfrastructureId">
+                            @foreach (var infrastructure in CloundInfrastructures)
+                            {
+                                <option value="@infrastructure.Id">@infrastructure.Name</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => AppComponent.CloudInfrastructure)" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="fw-bold" for="infrastructureComponentDescription">Description: </label>
+                        <div>@CloundInfrastructures.First(ci => ci.Id == SelectedInfrastructureId).Description</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="fw-bold" for="infrastructureComponentDescription">SLA: </label>
+                        <div> @String.Format("{0:0.0#####}%", @CloundInfrastructures.First(ci => ci.Id == SelectedInfrastructureId).SLA)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="fw-bold" for="hadeployments">Number of Redundant Deployments: </label>
+                        <InputNumber id="haDeployments" class="form-control" @bind-Value="@AppComponent.HADeployments"
+                            placeholder="Enter Number of HA Deployments"></InputNumber>
+                        <ValidationMessage For="@(() => AppComponent.HADeployments)" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="Close">Close</button>
+                    <button type="submit" class="btn btn-primary">Save App Component</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@if(_showDialog)
+{
+    <div class="modal-backdrop show"></div>
+}

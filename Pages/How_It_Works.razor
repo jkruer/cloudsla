@@ -1,0 +1,143 @@
+@page "/how-it-works"
+
+<PageTitle>How It Works</PageTitle>
+
+
+<h1>How Compound SLAs are Calculated</h1>
+
+<h3>Introduction</h3>
+<p>
+    Cloud services hosted by Amazon Web Services, Azure, Google and most others publish the Service Level Agreement, or SLA, for the individual services they provide. Architects, Platform Engineers and Developers are then responsible for putting these together to create an architecture that provides the hosting for an application.
+</p>
+
+<p>
+    Taken in isolation, these services usually provide something in the range of three to four nine's of availability:
+    <ul>
+        <li>Azure Traffic Manager: 99.99% or 'four nines'.</li>
+        <li>SQL Azure: 99.99% or 'four nines'.</li>
+        <li>Azure App Service: 99.95% or 'three nine five'.</li>
+    </ul>
+</p>
+
+<p>
+    However when combined together in architectures there is the possibility that any one component could suffer an outage resulting in an overall availability that is not equal to the the component services.
+</p>
+
+<h3>Serial Compound Availability</h3>
+<div class="text-center">        
+    <img src="img/serial.png" />
+</div>
+<p>
+    In this example there are three possible failure modes:
+    <ul>
+        <li>SQL Azure is down</li>
+        <li>App Service is down</li>
+        <li>Both are down</li>
+    </ul>
+    Therefore the overall availability of this "system" must lower than 99.95%.
+</p>
+<p>
+    In order to calculate Serial Compound Availability you simply multiply the availability of the individual components together.
+    <div class="text-center">
+        <img src="img/serialCalculation.png" />
+    </div>
+</p>
+
+<h5>Using the App to Calculate</h5>
+<p>
+    In order to create this same scenario in this application, you would add:
+    <ul>
+        <li>1 Instance of Azure App Service</li>
+        <li>1 Instance of Azure SQL</li>
+    </ul>
+</p>
+<p>
+    <div class="text-center">
+        <img src="img/serialAppCalculation.png" />
+    </div>
+</p>
+<p>
+    You can see that the app calculates a compound SLA of 99.900025%.
+</p>
+
+
+<h3>Parallel Compound Availability</h3>
+<p>
+    <div class="text-center">
+        <img src="img/parallel.png" />
+    </div>
+</p>
+<p>
+    In this architecture there are a large number of failure modes however principally:
+    <ul>
+        <li>Azure SQL in RegionA is down</li>
+        <li>Azure SQL in RegionB is down</li>
+        <li>App Service in RegionA is down</li>
+        <li>App Service in RegionB is down</li>
+        <li>Traffic Manager is down</li>
+        <li>Combinations of Above</li>
+    </ul>
+</p>
+<p>
+    However, the only scenarios that would cause the application to fail would be:
+    <ul>
+        <li>Traffic Manager is down</li>
+        <li>App Service is down in BOTH RegionA and RegionB</li>
+        <li>Azure SQL is down in BOTH RegionA and RegionB</li>
+    </ul>
+</p>
+<p>
+    Because Traffic Manager is a circuit breaker it is capable of detecting an outage in either region and routing traffic to the working region, however there is still a single point of failure in the form of Traffic Manager so the total availability of the "system" cannot be higher than 99.99%.
+</p>
+<p>
+    Calculating it in parallel is a little more complicated as we do need to consider what the percentage unavailability will be:
+</p>
+<p>
+    <div class="text-center" >
+        <img src="img/parallelCalculation.png" />
+    </div>
+</p>
+<p>
+    The calculation is done as follows:
+    <ol>
+        <li>
+            Multiply the unavailability of the two regions together.
+            <ul>
+                <li>0.1% * 0.1% = 0.0001%</li>
+            </ul>
+        </li>
+        <li>
+            Convert that back to availability
+            <ul>
+                <li>100% - 0.0001% = 99.9999%</li>
+            </ul>
+        </li>
+        <li>
+            Multiply the Traffic Manager availability by the availability of the two regions.
+            <ul>
+                <li>99.99% * 99.9999% = 99.9899%</li>
+            </ul>
+        </li>
+        <li>
+            The result is the whole system availability.
+            <ul>
+                <li>99.9899% is close to 99.99%</li>
+            </ul>
+        </li>
+    </ol>
+</p>
+
+<h5>Using the App to Calculate</h5>
+<p>
+    In order to create this same scenario in this application, you would add:
+    <ul>
+        <li>1 Instance of Azure Traffic Manager</li>
+        <li>2 Instances of Azure App Service</li>
+        <li>2 Instances of Azure SQL</li>
+    </ul>
+</p>
+<p>
+    <div class="text-center">
+        <img src="img/parallelAppCalculation.png" />
+    </div>
+</p>

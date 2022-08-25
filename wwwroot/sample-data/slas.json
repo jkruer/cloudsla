@@ -1,0 +1,159 @@
+[
+    {
+      "Id": 1,
+      "Name": "Azure DNS",
+      "Description": "Azure DNS",
+      "SLA": 100
+    },
+    {
+        "Id": 2,
+        "Name": "PostgreSQL Server",
+        "Description": "PostgreSQL Server - Single Server and our Internet gateway",
+        "SLA": 99.99
+    },
+    {
+        "Id": 3,
+        "Name": "PostgreSQL – Hyperscale",
+        "Description": "PostgreSQL – Hyperscale (Citus) High Availability Nodes",
+        "SLA": 99.95
+    },
+    {
+        "Id": 4,
+        "Name": "PostgreSQL – Flexible server",
+        "Description": "PostgreSQL – Flexible server configured without Zone Redundant High Availability",
+        "SLA": 99.9
+    },
+    {
+        "Id": 5,
+        "Name": "PostgreSQL – Flexible server Same Zone",
+        "Description": "PostgreSQL – Flexible server configured with Same Zone High Availability",
+        "SLA": 99.95
+    },
+    {
+        "Id": 6,
+        "Name": "PostgreSQL – Flexible server Zone Redundant",
+        "Description": "PostgreSQL – Flexible server configured with Zone Redundant High Availability",
+        "SLA": 99.99
+    },
+    {
+        "Id": 7,
+        "Name": "Azure Container Instances",
+        "Description": "Azure Container Instances",
+        "SLA": 99.9
+    },
+    {
+        "Id": 8,
+        "Name": "Azure Functions",
+        "Description": "Azure Functions",
+        "SLA": 99.95
+    },
+    {
+        "Id": 9,
+        "Name": "Azure Cosmos DB",
+        "Description": "Azure Cosmos DB",
+        "SLA": 99.99
+    },
+    {
+        "Id": 10,
+        "Name": "Azure Cosmos DB - Multi Region Write",
+        "Description": "Azure Cosmos DB configured with multiple Azure regions as writable endpoints for a Database",
+        "SLA": 99.999
+    },
+    {
+        "Id": 11,
+        "Name": "Azure Cache for Redis",
+        "Description": "Azure Cache for Redis Standard, Premium, Enterprise, and Enterprise Flash tier Cache",
+        "SLA": 99.9
+    },
+    {
+        "Id": 12,
+        "Name": "Azure Cache for Redis Enterprise 3+ AZs",
+        "Description": "Azure Cache for Redis Enterprise and Enterprise Flash tier Cache deployed to three or more Availability Zones in the same Azure region",
+        "SLA": 99.99
+    },
+    {
+        "Id": 13,
+        "Name": "Azure Cache for Redis Multi Region",
+        "Description": "Azure Cache for Redis deployed (1) to at least three Azure regions and three or more Availability Zones in each region and (2) with active geo-replication enabled for all Cache instances",
+        "SLA": 99.999
+    },
+    {
+        "Id": 14,
+        "Name": "Virtual Machine - Standard HDD",
+        "Description": "Single Instance Virtual Machine using Standard HDD Managed Disks for Operating System Disks and Data Disks",
+        "SLA": 95
+    },
+    {
+        "Id": 15,
+        "Name": "Virtual Machine - Standard SSD",
+        "Description": "Single Instance Virtual Machine using Standard SSD Managed Disks for Operating System Disk and Data Disks",
+        "SLA": 99.5
+    },
+    {
+        "Id": 16,
+        "Name": "Virtual Machine - Premium SSD",
+        "Description": "Single Instance Virtual Machine using Premium SSD or Ultra Disk for all Operating System Disks and Data Disks",
+        "SLA": 99.9
+    },
+    {
+        "Id": 17,
+        "Name": "Virtual Machine - HA Same AS",
+        "Description": "Virtual Machines that have two or more instances deployed in the same Availability Set or in the same Dedicated Host Group",
+        "SLA": 99.95
+    },
+    {
+        "Id": 18,
+        "Name": "Virtual Machine - HA Multi AZ",
+        "Description": " Virtual Machines that have two or more instances deployed across two or more Availability Zones in the same Azure region",
+        "SLA": 99.99
+    },
+    {
+        "Id": 19,
+        "Name": "Equinix",
+        "Description": " Virtual Machines that have two or more instances deployed across two or more Availability Zones in the same Azure region",
+        "SLA": 99.9
+    },
+    {
+        "Id": 20,
+        "Name": "AKS",
+        "Description": "AKS Clusters that do not use Azure Availability Zones",
+        "SLA": 99.9
+    },
+    {
+        "Id": 21,
+        "Name": "AKS with AZ",
+        "Description": "AKS Clusters that use Azure Availability Zones",
+        "SLA": 99.95
+    },
+    {
+        "Id": 22,
+        "Name": "Azure Load Balancer",
+        "Description": "Load Balanced Endpoint using Azure Standard Load Balancer, serving two or more Healthy Virtual Machine Instances",
+        "SLA": 99.99
+    },
+    {
+        "Id": 23,
+        "Name": "MongoDB Atlas",
+        "Description": "MongoDB Atlas deployments at level M10 or above",
+        "SLA": 99.995
+    },
+    {
+        "Id": 24,
+        "Name": "Azure SQL Basic",
+        "Description": "Azure SQL Basic",
+        "SLA": 99.95
+    },
+    {
+        "Id": 25,
+        "Name": "Azure App Service",
+        "Description": "Azure App Service",
+        "SLA": 99.95
+    },
+    {
+        "Id": 26,
+        "Name": "Azure Traffic Manager",
+        "Description": "Azure Traffic Manager",
+        "SLA": 99.99
+    }
+  ]
+  

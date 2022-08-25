@@ -1,0 +1,32 @@
+﻿@page "/"
+
+<PageTitle>Cloud 3.0 Infrastructure SLAs</PageTitle>
+
+
+<h1>Cloud SLAs</h1>
+@if(_cloudInfrastructures != null && _cloudInfrastructures.Any()) 
+{ 
+    <p>
+        <input type="text" class="form-control" name="filter" placeholder="Search..." 
+            @bind-value="_filterText" @bind-value:event="oninput" />
+    </p>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+        @foreach (var infrastructure in _filteredInfrastructures)
+        {                    
+            <div class="col">
+                <div class="card h-100 text-dark bg-light">
+                    <h5 class="card-header fw-bold">@infrastructure.Name</h5>
+                    <div class="card-body">
+                        <div class="card-text">@infrastructure.Description</div>                           
+                    </div>
+                    <div class="card-footer text-end">                         
+                        <div class="card-text fw-bold">SLA: @String.Format("{0:0.0#####}%", infrastructure.SLA)</div>  
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+
+

@@ -1,0 +1,39 @@
+﻿@page "/calculate"
+
+<PageTitle>Cloud 3.0 Infrastructure SLAs</PageTitle>
+
+
+<h1>Calculate your Infrastructure SLA</h1>
+<button @onclick="AddAppComponent" class="btn btn-primary">Add App Component</button>
+@if(AppComponents != null && AppComponents.Any()) 
+{ 
+    <h3>Your Infrastructure SLA is @String.Format("{0:0.0#####}%", CalculatedSla)</h3>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+        @foreach (var component in AppComponents)
+        {                    
+            <div class="col">
+                <div class="card h-100 @((component.SLA == LowestSla ? "text-white bg-danger" : "text-dark bg-light"))">
+                    <h5 class="card-header fw-bold">@component.Name</h5>
+                    <div class="card-body">
+                        <div class="card-text text-truncate">@component.CloudInfrastructure.Name</div>
+                        <div class="card-text">HA Deployments: @component.HADeployments</div>
+                        <div class="card-text fw-bold">SLA: @String.Format("{0:0.0#####}%", component.SLA)</div>                             
+                    </div>
+                    <div class="card-footer text-end"> 
+                        <button @onclick="() => DeleteAppComponent(component)" class="btn btn-danger">Delete</button>
+                        <button @onclick="() => EditAppComponent(component)" class="btn btn-primary">Edit</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@if(CloudInfrastructures != null && CloudInfrastructures.Any())
+{
+    <AppComponentDialog @ref="AppComponentDialog" CloundInfrastructures="@CloudInfrastructures" CloseEventCallback="@AppComponentDialog_OnDialogClose" />
+}
+
+
+
